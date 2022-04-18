@@ -29,9 +29,12 @@ namespace WebApi3.Controllers
             return new ObjectResult(user);
         }
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<User>>> Post(User user)
+        public async Task<ActionResult<IEnumerable<User>>> Post(string name,int age)
         {
-            if (user == null) return BadRequest();
+            System.Console.WriteLine(name);
+            User user = new User();
+            user.Name = name;
+            user.Age = age;
             db.Users.Add(user);
             await db.SaveChangesAsync();
             return Ok(user);
